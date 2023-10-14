@@ -1,0 +1,25 @@
+# Ignorar directorios generados automáticamente
+node_modules/
+dist/
+coverage/
+
+# Ignorar archivos generados automáticamente
+package-lock.json
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignorar archivos de configuración de desarrollo local
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignorar archivos de registro
+logs/
+*.log
+
+# Ignorar archivos y directorios específicos
+build/
+public/uploads/
