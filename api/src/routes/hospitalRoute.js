@@ -20,4 +20,14 @@ hospitalRoute.post("/", async (req, res) => {
   }
 });
 
-module.exports = hospitalRoute
+hospitalRoute.get("/", async (req, res) => {
+  try {
+    const allHospitals = await Hospital.findAllHospitals();
+    res.status(200).json(allHospitals);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+module.exports = hospitalRoute;
