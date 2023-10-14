@@ -1,6 +1,6 @@
 const express = require("express");
 const hospitalRoute = express.Router();
-const Hospital = require("../models/hospitalsModel");
+const Hospital = require("../models/hospitalModel");
 
 hospitalRoute.post("/", async (req, res) => {
   try {

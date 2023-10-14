@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const dotenv = require("dotenv");
 
 const sequelize = require("./database");
-const hospitalRoute = require("./routes/hospitalRoute");
+const hospitalRoute = require("./src/routes/hospitalRoute")
 
 dotenv.config();
 
