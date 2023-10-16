@@ -15,17 +15,13 @@ const sequelize = new Sequelize(DBNAME, DBUSER, PASS, {
     ssl: false,
   },
   logging: false,
-  define: {
-    timestamps: true,
-  },
 });
 
-
-try { 
-    sequelize.authenticate()
-    console.log("DB Connected");
+try {
+  sequelize.authenticate();
+  console.log("DB Connected");
 } catch (error) {
-    console.log(error);
+  console.log(error);
 }
 
-module.exports = sequelize 
+module.exports = sequelize;

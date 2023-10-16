@@ -3,10 +3,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
-
 const sequelize = require("./database");
-const hospitalRoute = require("./src/routes/hospitalRoute")
-
+const hospitalRoute = require("./src/routes/hospitalRoute");
 dotenv.config();
 
 const app = express();
@@ -24,3 +22,4 @@ sequelize.sync({ force: true }).then(() => {
     console.log(`Server on PORT ${PORT}`);
   });
 });
+
