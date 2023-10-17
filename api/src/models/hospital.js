@@ -20,8 +20,12 @@ const Hospital = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    streetNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
-  { timestamps: false, freezeTableName: true }
+  { timestamps: true, freezeTableName: true }
 );
 
 Hospital.hasOne(Supplies, { foreignKey: "hospitalId" });

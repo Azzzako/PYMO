@@ -5,12 +5,22 @@ const Supplies = require("../models/supplies");
 const Petition = require("../models/petitions");
 
 //Registrar Hospital en la base de Datos
-hospitalRoute.post("/", async (req, res) => {
+hospitalRoute.post("/register", async (req, res) => {
   try {
-    const { hospitalName, casePerMonth, faceMask, KN95, faces } = req.body;
+    const { hospitalName, casePerMonth, faceMask, KN95, faces, streetNumber } = req.body;
+
+    const hospitalRegisterTrue = await Hospital.findOne({
+      where: { hospitalName: hospitalName },
+    });
+
+    if (hospitalRegisterTrue) {
+      return res.status(302).json({ error: "El hospital ya ha sido registrado" });
+    }
+
     const hospital = await Hospital.create({
       hospitalName,
       casePerMonth,
+      streetNumber
     });
 
     await Supplies.create({
@@ -20,7 +30,11 @@ hospitalRoute.post("/", async (req, res) => {
       faces,
     });
 
-    res.status(200).json({ msg: "Registered" });
+    const hospitalWithSupplies = await Hospital.findByPk(hospital.id, {
+      include: Supplies,
+    });
+
+    res.status(200).json(hospitalWithSupplies);
     console.log(`Hospital ${hospitalName} Registrado`);
   } catch (error) {
     console.log(error);
@@ -82,13 +96,13 @@ hospitalRoute.post("/:hospitalId/petition", async (req, res) => {
 });
 
 //Cambiar el estado de la peticion
-hospitalRoute.put("/petition/:petitionId", async (req, res)  => {
+hospitalRoute.put("/petition/:petitionId", async (req, res) => {
   try {
     const { petitionId } = req.params;
-    const petition = await Petition.findByPk(petitionId)
-    petition.fullFilled = !petition.fullFilled
-    petition.save()
-    res.status(200).json(petition)
+    const petition = await Petition.findByPk(petitionId);
+    petition.fullFilled = !petition.fullFilled;
+    petition.save();
+    res.status(200).json(petition);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

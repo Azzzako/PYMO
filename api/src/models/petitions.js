@@ -3,7 +3,7 @@ const sequelize = require("../../database");
 const Hospital = require("./hospital");
 
 const Petition = sequelize.define(
-  "Petition",
+  "petition",
   {
     petitionId: {
       type: DataTypes.INTEGER,

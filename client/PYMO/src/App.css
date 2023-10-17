@@ -2,8 +2,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@font-face {
+  font-family: 'Filson';
+  src: url('./fonts/Filson.ttf') format('truetype');
+}
 
-body{
-  margin: 0;
+@font-face {
+  font-family: 'Agora';
+  src: url('./fonts/AgoraReg.ttf') format('truetype');
+}
+
+
+
+html, body{
   padding: 0;
+  margin: 0;
 }

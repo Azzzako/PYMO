@@ -11,17 +11,17 @@ const Supplies = sequelize.define("Supplies", {
   },
   KN95: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    defaultValue: 0,
   },
   faceMask: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    defaultValue: 0
   },
   faces: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    defaultValue: 0
   }
-},{ timestamps: false,initialAutoIncrement: false,
+},{ timestamps: true, initialAutoIncrement: false,
 freezeTableName: true,});
 
 module.exports = Supplies;
