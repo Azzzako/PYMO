@@ -16,19 +16,23 @@ const Petition = sequelize.define(
       allowNull: false,
     },
     faceMask: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER, 
       allowNull: false,
     },
     faces: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    fullFilled: {
+    filled: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    recieved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   },
-  { timestamps: false, freezeTableName: true }
+  { timestamps: true, freezeTableName: true }
 );
 
 module.exports = Petition;

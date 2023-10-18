@@ -24,4 +24,5 @@ try {
   console.log(error);
 }
 
+
 module.exports = sequelize;

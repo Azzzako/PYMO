@@ -1,7 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../../database");
 const Supplies = require("./supplies");
+
 const Petition = require("./petitions");
+const Stock = require("./stock");
 
 const Hospital = sequelize.define(
   "Hospital",
@@ -22,12 +24,12 @@ const Hospital = sequelize.define(
     },
     streetNumber: {
       type: DataTypes.STRING,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   { timestamps: true, freezeTableName: true }
 );
 
-Hospital.hasOne(Supplies, { foreignKey: "hospitalId" });
+Hospital.hasOne(Supplies, { foreignKey: "hospitalId" }); 
 Hospital.hasMany(Petition);
 module.exports = Hospital;
