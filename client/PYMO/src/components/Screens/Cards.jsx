@@ -1,4 +1,14 @@
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
 import React, { useState } from "react";
 import CustomButton1 from "../Custom/CustomButton";
 import AdminModal from "../Custom/AdminModal";
@@ -11,13 +21,12 @@ const Cards = ({
   getHospitals,
   screen,
   supplies,
+  getStock
 }) => {
-  const [expanded, setExpanded] = useState(false);
+
   const [response, setResponse] = useState({});
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+ 
 
   let allPetitions;
   if (screen === "cards") {
@@ -62,56 +71,54 @@ const Cards = ({
     };
 
     return (
-      <div className={`w-full text-center`}>
+      <TableBody>
         <AdminModal
           response={response}
           setResponse={setResponse}
           getHospitals={getHospitals}
+          getStock={getStock}
         />
-        <Accordion
+        <TableRow
           key={ele.id}
-          expanded={expanded === ele.petitionId}
-          onChange={handleChange(ele.petitionId)}
-          sx={
-            ele.filled
-              ? { backgroundColor: "green" }
-              : { backgroundColor: "red" }
-          }
+          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
-          <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-            <h1 className="text-center w-full text-white">{formattedDate}</h1>
-          </AccordionSummary>
-          <AccordionDetails className="flex flex-col gap-2 text-white">
-            <h1>KN95: {ele.KN95}</h1>
-            <h1>Cubrebocas: {ele.faceMask}</h1>
-            <h1>Caretas: {ele.faces}</h1>
+          <TableCell align="right" component="th" scope="row">
+            {name}
+          </TableCell>
+          <TableCell align="right">{cases}</TableCell>
+          <TableCell align="right">{formattedDate}</TableCell>
+          <TableCell align="right">{ele.petitionId}</TableCell>
+          <TableCell align="right">{ele.KN95}</TableCell>
+          <TableCell align="right">{ele.faceMask}</TableCell>
+          <TableCell align="right">{ele.faces}</TableCell>
+          <TableCell align="right">
             {ele.filled ? (
-              "Se surtio el " + updatedDate
+              `Orden Surtida ${updatedDate}`
             ) : (
               <CustomButton1 label="Surtir" onClick={petitionIdToState} />
             )}
-          </AccordionDetails>
-        </Accordion>
-      </div>
+          </TableCell>
+        </TableRow>
+      </TableBody>
     );
   });
 
   return (
-    <div className="w-full flex flex-col justify-center items-center p-8 gap-4 bg-bg2 bg-cover text-center">
-      <h1 className="font-filson text-white">{name}</h1>
-      <h1 className="font-filson text-white">
-        Casos registrados por mes: {cases}
-        <h1>
-          Se tienen
-          <br />{" "}
-        </h1>
-        <h1>KN95: {supplies.KN95}</h1>
-        <h1>Cubrebocas: {supplies.faceMask}</h1>
-        <h1>Caretas: {supplies.faces} </h1>
-      </h1>
-
-      {pet}
-    </div>
+    <TableContainer component={Paper}>
+      <Table aria-label="simple table" sx={{ minWidth: "full" }}>
+        <TableRow>
+          <TableCell align="right">Institucion</TableCell>
+          <TableCell align="right">Casos por Mes</TableCell>
+          <TableCell align="right">Fecha de Solicitud</TableCell>
+          <TableCell align="right">Numero de Orden</TableCell>
+          <TableCell align="right">KN95</TableCell>
+          <TableCell align="right">Cubrebocas</TableCell>
+          <TableCell align="right">Mascarillas</TableCell>
+          <TableCell align="right">Status</TableCell>
+        </TableRow>
+        {pet}
+      </Table>
+    </TableContainer>
   );
 };
 

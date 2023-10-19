@@ -18,11 +18,13 @@ const Dashboard = () => {
     getStock();
   }, []);
 
+  console.log('stock: ', stock);
+
   return (
     <div className="flex flex-col bg-bg1 w-full">
         <h1 className="text-center p-4 font-filson text-3xl">Bienvenido al Dashboard de administracion</h1>
       <div className="w-full">
-        {stock === null ? <div><ForceStock/></div> : <div><Admin/></div>}
+        {stock === null ? <div><ForceStock getStock={getStock}/></div> : <div><Admin getStock={getStock} stock={stock}/></div>}
       </div>
 
       

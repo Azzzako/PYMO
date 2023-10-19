@@ -9,13 +9,13 @@ function App() {
   return (
     <div className="">
       <Layout>
-        <Router>
+        
           <Routes>
             <Route exact path="/" element={<RegisterScreen />} />
             <Route path="/petitions" element={<SupplyScreen/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
           </Routes>
-        </Router>
+        
       </Layout>
     </div>
   );

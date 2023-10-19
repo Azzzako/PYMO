@@ -3,7 +3,7 @@ import { Modal, Box, Fade } from "@mui/material";
 import CustomButton1 from "./CustomButton";
 import axios from "axios";
 
-const AdminModal = ({ response, setResponse, getHospitals }) => {
+const AdminModal = ({ response, setResponse, getHospitals, getStock }) => {
   const handleClose = () => {
     setResponse({ error: false, open: false });
   };
@@ -17,6 +17,7 @@ const AdminModal = ({ response, setResponse, getHospitals }) => {
         setResponse({ error: false, open: false });
       });
     await getHospitals();
+    await getStock()
   };
 
   const style = {
